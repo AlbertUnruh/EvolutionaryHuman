@@ -13,7 +13,6 @@ The following properties are used
 for better understanding you can take a look into the [property notes][]):
 - happiness
 - hunger
-- thirst
 - in-love (only used where ``sexuality`` [!=][] ``asexual``)
   - ``person``
 - pregnant (only used where ``gender`` [==][] ``female``)
@@ -39,7 +38,7 @@ for better understanding you can take a look into the [property notes][]):
 
 
 ### Notes On The Properties
-The properties ``happiness``, ``hunger`` and ``thirst`` are values between ``0``
+The properties ``happiness`` and ``hunger`` are values between ``0``
 and ``1``.
 
 While I was naming ``sexuality`` as a property I didn't mention ``romantic``.
@@ -52,13 +51,13 @@ If the person has a high ``IQ`` the person 'll have more money than a person wit
 lower ``IQ``.
 
 The ``happiness`` is also affected by money (from the parents if they're still kids
-(20 and younger), ``hunger`` and ``thirst``).
+(20 and younger) and ``hunger``).
 Worth mentioning is that a relationship (two persons love each other) increases the
 ``happiness`` and loving a person without a relationship decreases it.
 It should be mentioned that a too low ``happiness`` can end in depression and suicide.
 
-The behavior of ``hunger`` and ``thirst`` depend on the money and are mostly high.
-They decrease only if food and water are too expensive (the prices only explodes when
+The behavior of ``hunger`` depends on the money and are mostly high.
+They decrease only if food is too expensive (the prices only explodes when
 the [worker-population-ratio][] is too low).
 
 About the love I have only one thing to say: it's wonderful!
