@@ -69,6 +69,6 @@ And a person has a
 
 [properties]: #properties-for-the-individuals
 [property notes]: #notes-on-the-properties
-[==]: # "A is equal B"
-[!=]: # "A is not qual B"
+[==]: # "A is equal to B"
+[!=]: # "A is not qual to B"
 [worker-population-ratio]: # "WORKER / POPULATION = RATIO"
