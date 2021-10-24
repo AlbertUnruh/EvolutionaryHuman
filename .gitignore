@@ -1,0 +1,9 @@
+# Logs
+*.log
+
+# PyCharm
+.idea/
+
+# PipEnv
+Pipfile
+Pipfile.lock
