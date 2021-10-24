@@ -15,6 +15,8 @@ for better understanding you can take a look into the [property notes][]):
 - hunger
 - in-love (only used where ``sexuality`` [!=][] ``asexual``)
   - ``person``
+- married
+  - ``person``
 - pregnant (only used where ``gender`` [==][] ``female``)
   - (``since`` <- won't be required because the program cycles one year.
     In the cycle after the woman gets pregnant she's going to receive a baby)
@@ -52,17 +54,26 @@ lower ``IQ``.
 
 The ``happiness`` is also affected by money (from the parents if they're still kids
 (20 and younger) and ``hunger``).
-Worth mentioning is that a relationship (two persons love each other) increases the
-``happiness`` and loving a person without a relationship decreases it.
+Worth mentioning is that a relationship (two persons are ``in-love`` with each other)
+increases the ``happiness`` and loving a person without a relationship decreases it.
 It should be mentioned that a too low ``happiness`` can end in depression and suicide.
 
-The behavior of ``hunger`` depends on the money and are mostly high.
-They decrease only if food is too expensive (the prices only explodes when
+The behavior of ``hunger`` depends on the money and is mostly high.
+It decreases only if food is too expensive (the price only explodes when
 the [worker-population-ratio][] is too low).
 
 About the love I have only one thing to say: it's wonderful!
-And a person has a 
+If a couple is in a heterosexual-relationship there is a chance that the woman
+gets pregnant. While she's pregnant she can't work.
 
+Children don't have any money which affects their ``happiness``, but the money from
+the parents affects this property.
+If a children looses both parents the children 'll be adopted by another couple. This
+automatically adds the new parents to the ``parents`` and the children 'll also be
+added to the ``children``-property from the couple.
+
+For two persons to happen to be a couple they just need to be ``in-love``, but at the
+same time and for the marriage they have to spend some money (in %).
 
 
 
