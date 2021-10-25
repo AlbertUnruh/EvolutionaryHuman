@@ -18,7 +18,7 @@ for better understanding you can take a look into the [property notes][]):
 - married
   - ``person``
 - pregnant (only used where ``gender`` [==][] ``female``)
-  - (``since`` <- won't be required because the program cycles one year.
+  - (``since`` <- won't be required/used because the program cycles one year.
     In the cycle after the woman gets pregnant she's going to receive a baby)
 - gender
   - ``male``
@@ -37,6 +37,7 @@ for better understanding you can take a look into the [property notes][]):
 - family
   - ``parents``
   - ``children``
+- name
 
 
 ### Notes On The Properties
@@ -74,6 +75,10 @@ added to the ``children``-property from the couple.
 
 For two persons to happen to be a couple they just need to be ``in-love``, but at the
 same time and for the marriage they have to spend some money (in %).
+
+And to be nice every person has a ``name`` **:)**.
+
+
 
 
 

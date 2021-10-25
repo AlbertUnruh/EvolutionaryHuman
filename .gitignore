@@ -7,3 +7,7 @@
 # PipEnv
 Pipfile
 Pipfile.lock
+
+# Raw Data
+tools/**/*.csv
+tools/**/*.txt
