@@ -47,6 +47,8 @@ and ``1``.
 While I was naming ``sexuality`` as a property I didn't mention ``romantic``.
 This is so because I want it not *too* complex at the moment. Eventually I'll
 implement ``romantic`` in a later version.
+I have to mention at this point that ``bisexual`` describes *here* the attraction to
+``male`` and ``female``.
 
 When a person is an adult (21 and older) the ``money`` plays a big role. The person 'll
 automatically have a job and the cash the person receives depends on the ``IQ``.
