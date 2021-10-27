@@ -1,3 +1,5 @@
+import typing
+
 from .base import Base
 from .gender import Gender
 
@@ -15,9 +17,10 @@ class Sexuality(Base):
     _type: str
     _slots_for_repr = ("type",)
 
-    __slots__ = ()
-
-    def __init__(self, sexuality, gender):
+    def __init__(self,
+                 sexuality: str,
+                 gender: typing.Union[Gender, str]
+                 ) -> typing.NoReturn:
         """
         Parameters
         ----------
@@ -34,7 +37,7 @@ class Sexuality(Base):
         self._gender = gender
 
     @property
-    def type(self):
+    def type(self) -> str:
         """
         Returns
         -------
@@ -42,7 +45,7 @@ class Sexuality(Base):
         """
         return self._type
 
-    def can_love(self, *, gender):
+    def can_love(self, *, gender: typing.Union[Gender, str]) -> bool:
         """
         Notes
         -----
@@ -78,4 +81,4 @@ class Sexuality(Base):
 
         return False  # only "asexual" is left and is always False
 
-    __str__ = lambda self: self.type  # noqa E731
+    __str__: typing.Callable[[object], str] = lambda self: self.type
