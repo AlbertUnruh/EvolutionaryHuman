@@ -13,6 +13,9 @@ __all__ = (
 
 
 class Person(Base):
+    _slots_for_repr = ("happiness", "hunger", "in_love", "married", "pregnant", "gender",
+                       "sexuality", "age", "money", "iq", "family", "name", "id", "alive")
+
     _happiness: float
     _hunger: float
     _in_love: typing.Optional["Person"]
@@ -26,6 +29,7 @@ class Person(Base):
     _family: "Family"
     _name: str
     _id: str
+    _alive: bool
 
     def __init__(self, *,
                  happiness: typing.Annotated[typing.SupportsFloat, "ValueRange[0., 1.]"] = 1,
@@ -40,7 +44,8 @@ class Person(Base):
                  iq: typing.Annotated[typing.SupportsInt, "MinVal[0]"],
                  family: typing.Optional["Family"] = None,
                  name: typing.AnyStr,
-                 id: typing.Optional[typing.AnyStr] = None  # noqa
+                 id: typing.Optional[typing.AnyStr] = None,  # noqa
+                 alive: bool = True
                  ) -> typing.NoReturn:
         """
         Parameters
@@ -62,6 +67,7 @@ class Person(Base):
 
         # *can* be set, not recommended
         id: typing.AnyStr, optional
+        alive: bool
         """
         # first the required ones...
         assert isinstance(gender, Gender),\
@@ -116,6 +122,8 @@ class Person(Base):
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique
         self._id = str(id) or uuid.uuid4()  # without assert, because empty IDs 'll be replaced
+
+        self._alive = bool(alive)
 
     @property
     def happiness(self) -> float:
@@ -233,3 +241,21 @@ class Person(Base):
         str
         """
         return self._id
+
+    @property
+    def alive(self) -> bool:
+        """
+        Returns
+        -------
+        bool
+        """
+        return self._alive
+
+    @property
+    def dead(self) -> bool:
+        """
+        Returns
+        -------
+        bool
+        """
+        return not self._alive

@@ -13,8 +13,9 @@ genders = ("male", "female", "non-binary", "genderless")
 
 
 class Gender(Base):
-    _type: str
     _slots_for_repr = ("type",)
+
+    _type: str
 
     def __init__(self,
                  gender: str
