@@ -90,7 +90,6 @@ And to be nice every person has a ``name`` **:)**.
 
 
 
-[codestyle: black]
 [properties]: #properties-for-the-individuals
 [property notes]: #notes-on-the-properties
 [==]: # "A is equal to B"
