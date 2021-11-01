@@ -165,6 +165,11 @@ class PersonBase(Base, abc.ABC):
     def dead(self) -> bool:
         ...
 
+    @classmethod
+    @abc.abstractmethod
+    def create_person(cls, *args, **kwargs) -> "PersonBase":
+        ...
+
 
 class SexualityBase(Base, abc.ABC):
     _slots_for_repr = {

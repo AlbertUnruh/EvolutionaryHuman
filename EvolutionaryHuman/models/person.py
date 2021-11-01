@@ -136,6 +136,30 @@ class Person(PersonBase):
 
         self._alive = bool(alive)
 
+    @classmethod
+    def create_person(cls, *, replace_old: bool = False, **kwargs) -> "Person":
+        """
+        Parameters
+        ----------
+        replace_old: bool
+            Whether an existing entry in the database should be replaced.
+        kwargs
+            The Arguments for the ``Person``.
+
+        Returns
+        -------
+        Person
+
+        Raises
+        ------
+        ValueError
+            Raises if ``replace_old != True`` and the persons id already exists.
+        """
+        person = cls.__init__(**kwargs)
+        # ToDo: connect to database to check for duplicates (persons id)
+        # ToDo: connect to database to create entry
+        return person
+
     @property
     def happiness(self) -> float:
         """
