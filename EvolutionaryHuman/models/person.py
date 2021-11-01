@@ -13,6 +13,10 @@ __all__ = ("Person",)
 
 
 class Person(PersonBase):
+    """
+    Represents a person.
+    """
+
     _happiness: float
     _hunger: float
     _in_love: typing.Optional["Person"]
@@ -62,6 +66,7 @@ class Person(PersonBase):
         in_love, married: Person, optional
         pregnant: bool
         age: typing.SupportsInt
+            Must be positive!
         family: Family, optional
 
         # *can* be set, not recommended
@@ -71,12 +76,12 @@ class Person(PersonBase):
         # first the required ones...
         assert isinstance(
             gender, Gender
-        ), "'gender' must be an instance of '.models.Gender'!"
+        ), "'gender' must be an instance of '.models.base.GenderBase'!"
         self._gender = gender
 
         assert isinstance(
             sexuality, Sexuality
-        ), "'sexuality' must be an instance of '.models.Sexuality'!"
+        ), "'sexuality' must be an instance of '.models.base.SexualityBase'!"
         self._sexuality = sexuality
 
         assert 0 <= (
@@ -103,19 +108,19 @@ class Person(PersonBase):
         ), f"'money' must be a value greater then 0 and not {money!r}"
         self._money = money
 
-        assert (
+        assert (  # ToDo: person.can_love()
             isinstance(in_love, Person) or in_love is None
-        ), "'in_love' must be an instance of '.models.Person' or None!"
+        ), "'in_love' must be an instance of '.models.base.PersonBase' or None!"
         self._in_love = in_love
 
-        assert (
+        assert (  # ToDo: person.can_love()
             isinstance(married, Person) or married is None
-        ), "'married' must be an instance of '.models.Person' or None!"
+        ), "'married' must be an instance of '.models.base.PersonBase' or None!"
         self._married = married
 
         assert (
             self.gender.type == "female" if (pregnant := bool(pregnant)) else True
-        ), "Only persons where ``Gender.type == 'female'`` can get pregnant!"
+        ), "Only persons where ``GenderBase.type == 'female'`` can get pregnant!"
         self._pregnant = pregnant
 
         assert 0 <= (
@@ -125,8 +130,8 @@ class Person(PersonBase):
 
         assert (
             isinstance(family, Family) or family is None
-        ), "'family' must be an instance of '.models.Family' or None!"
-        self._family = family or Family()
+        ), "'family' must be an instance of '.models.base.FamilyBase' or None!"
+        self._family = family or __import__("family", None, None, ".").Family()
 
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique

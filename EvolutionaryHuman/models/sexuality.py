@@ -10,6 +10,9 @@ sexualities = ("heterosexual", "homosexual", "bisexual", "pansexual", "asexual")
 
 
 class Sexuality(SexualityBase):
+    """
+    Represents a sexuality.
+    """
     _type: str
 
     def __init__(
@@ -31,7 +34,7 @@ class Sexuality(SexualityBase):
             gender = Gender(gender)
         assert isinstance(
             gender, Gender
-        ), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
+        ), f"gender must be an instance of 'GenderBase', not {gender.__class__.__name__!r}!"
         self._gender = gender
 
     @property
@@ -63,7 +66,7 @@ class Sexuality(SexualityBase):
             gender = Gender(gender)
         assert isinstance(
             gender, Gender
-        ), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
+        ), f"gender must be an instance of 'GenderBase', not {gender.__class__.__name__!r}!"
 
         if self.type == "heterosexual":
             return self._gender.type != gender.type
@@ -80,5 +83,3 @@ class Sexuality(SexualityBase):
             return True
 
         return False  # only "asexual" is left and is always False
-
-    __str__: typing.Callable[[object], str] = lambda self: self.type

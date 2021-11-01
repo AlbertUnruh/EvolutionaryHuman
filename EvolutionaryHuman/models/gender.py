@@ -10,6 +10,10 @@ genders = ("male", "female", "non-binary", "genderless")
 
 
 class Gender(GenderBase):
+    """
+    Represents a gender.
+    """
+
     _type: str
 
     def __init__(self, gender: str) -> typing.NoReturn:
@@ -31,5 +35,3 @@ class Gender(GenderBase):
         str
         """
         return self._type
-
-    __str__: typing.Callable[[object], str] = lambda self: self.type

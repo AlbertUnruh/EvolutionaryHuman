@@ -7,6 +7,10 @@ __all__ = ("Family",)
 
 
 class Family(FamilyBase):
+    """
+    Represents a family.
+    """
+
     _parents: list[str]
     _children: list[str]
 
