@@ -1,4 +1,8 @@
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![License: GNU AGPLv3](https://img.shields.io/badge/license-GNU%20AGPLv3-ff00ff.svg)](https://choosealicense.com/licenses/agpl-3.0/)
+[![Tokei.rs](https://tokei.rs/b1/github/AlbertUnruh/EvolutionaryHuman?category=code)](https://tokei.rs)
+[![Tokei.rs](https://tokei.rs/b1/github/AlbertUnruh/EvolutionaryHuman?category=lines)](https://tokei.rs)
+
 
 # Evolutionary Human
 A project by AlbertUnruh
@@ -86,6 +90,7 @@ And to be nice every person has a ``name`` **:)**.
 
 
 
+[codestyle: black]
 [properties]: #properties-for-the-individuals
 [property notes]: #notes-on-the-properties
 [==]: # "A is equal to B"

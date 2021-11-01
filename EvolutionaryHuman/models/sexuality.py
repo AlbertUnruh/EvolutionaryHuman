@@ -13,6 +13,7 @@ class Sexuality(SexualityBase):
     """
     Represents a sexuality.
     """
+
     _type: str
 
     def __init__(
