@@ -1,31 +1,26 @@
 import typing
 
-from .base import Base
+from .base import GenderBase
 
 
-__all__ = (
-    "Gender",
-    "genders"
-)
+__all__ = ("Gender", "genders")
 
 
 genders = ("male", "female", "non-binary", "genderless")
 
 
-class Gender(Base):
-    _slots_for_repr = ("type",)
-
+class Gender(GenderBase):
     _type: str
 
-    def __init__(self,
-                 gender: str
-                 ) -> typing.NoReturn:
+    def __init__(self, gender: str) -> typing.NoReturn:
         """
         Parameters
         ----------
         gender: str
         """
-        assert gender in genders, f"Invalid gender {gender!r}! Try one of these: {', '.join(genders)}"
+        assert (
+            gender in genders
+        ), f"Invalid gender {gender!r}! Try one of these: {', '.join(genders)}"
         self._type = gender
 
     @property

@@ -1,27 +1,20 @@
 import typing
 
-from .base import Base
-from .gender import Gender
+from .base import SexualityBase, GenderBase as Gender
 
 
-__all__ = (
-    "Sexuality",
-    "sexualities"
-)
+__all__ = ("Sexuality", "sexualities")
 
 
 sexualities = ("heterosexual", "homosexual", "bisexual", "pansexual", "asexual")
 
 
-class Sexuality(Base):
-    _slots_for_repr = ("type",)
-
+class Sexuality(SexualityBase):
     _type: str
 
-    def __init__(self,
-                 sexuality: str,
-                 gender: typing.Union[Gender, str]
-                 ) -> typing.NoReturn:
+    def __init__(
+        self, sexuality: str, gender: typing.Union[Gender, str]
+    ) -> typing.NoReturn:
         """
         Parameters
         ----------
@@ -29,12 +22,16 @@ class Sexuality(Base):
         gender: Gender, str
             Needed for ``Sexuality.can_love()``.
         """
-        assert sexuality in sexualities, f"Invalid sexuality {sexuality!r}! Try one of these: {', '.join(sexualities)}"
+        assert (
+            sexuality in sexualities
+        ), f"Invalid sexuality {sexuality!r}! Try one of these: {', '.join(sexualities)}"
         self._type = sexuality
 
         if isinstance(gender, str):
             gender = Gender(gender)
-        assert isinstance(gender, Gender), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
+        assert isinstance(
+            gender, Gender
+        ), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
         self._gender = gender
 
     @property
@@ -64,7 +61,9 @@ class Sexuality(Base):
         """
         if isinstance(gender, str):
             gender = Gender(gender)
-        assert isinstance(gender, Gender), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
+        assert isinstance(
+            gender, Gender
+        ), f"gender must be an instance of 'Gender', not {gender.__class__.__name__!r}!"
 
         if self.type == "heterosexual":
             return self._gender.type != gender.type

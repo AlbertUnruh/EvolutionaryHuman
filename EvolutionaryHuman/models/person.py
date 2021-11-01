@@ -1,21 +1,18 @@
 import typing
 import uuid
 
-from .base import Base
-from .family import Family
-from .gender import Gender
-from .sexuality import Sexuality
-
-
-__all__ = (
-    "Person",
+from .base import (
+    PersonBase,
+    FamilyBase as Family,
+    GenderBase as Gender,
+    SexualityBase as Sexuality,
 )
 
 
-class Person(Base):
-    _slots_for_repr = ("happiness", "hunger", "in_love", "married", "pregnant", "gender",
-                       "sexuality", "age", "money", "iq", "family", "name", "id", "alive")
+__all__ = ("Person",)
 
+
+class Person(PersonBase):
     _happiness: float
     _hunger: float
     _in_love: typing.Optional["Person"]
@@ -31,22 +28,24 @@ class Person(Base):
     _id: str
     _alive: bool
 
-    def __init__(self, *,
-                 happiness: typing.Annotated[typing.SupportsFloat, "ValueRange[0., 1.]"] = 1,
-                 hunger: typing.Annotated[typing.SupportsFloat, "ValueRange[0., 1."] = 1,
-                 in_love: typing.Optional["Person"] = None,
-                 married: typing.Optional["Person"] = None,
-                 pregnant: bool = False,
-                 gender: "Gender",
-                 sexuality: "Sexuality",
-                 age: typing.Annotated[typing.SupportsInt, "MinVal[0]"] = 0,
-                 money: typing.Annotated[typing.SupportsFloat, "MinVal[0.]"] = 0.,
-                 iq: typing.Annotated[typing.SupportsInt, "MinVal[0]"],
-                 family: typing.Optional["Family"] = None,
-                 name: typing.AnyStr,
-                 id: typing.Optional[typing.AnyStr] = None,  # noqa
-                 alive: bool = True
-                 ) -> typing.NoReturn:
+    def __init__(
+        self,
+        *,
+        happiness: typing.Annotated[typing.SupportsFloat, "ValueRange[0., 1.]"] = 1,
+        hunger: typing.Annotated[typing.SupportsFloat, "ValueRange[0., 1."] = 1,
+        in_love: typing.Optional["Person"] = None,
+        married: typing.Optional["Person"] = None,
+        pregnant: bool = False,
+        gender: "Gender",
+        sexuality: "Sexuality",
+        age: typing.Annotated[typing.SupportsInt, "MinVal[0]"] = 0,
+        money: typing.Annotated[typing.SupportsFloat, "MinVal[0.]"] = 0.0,
+        iq: typing.Annotated[typing.SupportsInt, "MinVal[0]"],
+        family: typing.Optional["Family"] = None,
+        name: typing.AnyStr,
+        id: typing.Optional[typing.AnyStr] = None,  # noqa
+        alive: bool = True,
+    ) -> typing.NoReturn:
         """
         Parameters
         ----------
@@ -70,58 +69,70 @@ class Person(Base):
         alive: bool
         """
         # first the required ones...
-        assert isinstance(gender, Gender),\
-            "'gender' must be an instance of '.models.Gender'!"
+        assert isinstance(
+            gender, Gender
+        ), "'gender' must be an instance of '.models.Gender'!"
         self._gender = gender
 
-        assert isinstance(sexuality, Sexuality),\
-            "'sexuality' must be an instance of '.models.Sexuality'!"
+        assert isinstance(
+            sexuality, Sexuality
+        ), "'sexuality' must be an instance of '.models.Sexuality'!"
         self._sexuality = sexuality
 
-        assert 0 <= (iq := int(iq)),\
-            f"'iq' must be a value greater then 0 and not {iq!r}"
+        assert 0 <= (
+            iq := int(iq)
+        ), f"'iq' must be a value greater then 0 and not {iq!r}"
         self._iq = iq
 
-        assert (name := str(name)),\
-            "'name' must be at least one character long!"
+        assert (name := str(name)), "'name' must be at least one character long!"
         self._name = name
 
         # second the optional, but recommended, ones...
-        assert 0 <= (happiness := float(happiness)) <= 1,\
-            f"'happiness' must be a value between 0 and 1 and not {happiness!r}!"
+        assert (
+            0 <= (happiness := float(happiness)) <= 1
+        ), f"'happiness' must be a value between 0 and 1 and not {happiness!r}!"
         self._happiness = happiness
 
-        assert 0 <= (hunger := float(hunger)) <= 1,\
-            f"'hunger' must be a value between 0 and 1 and not {hunger!r}"
+        assert (
+            0 <= (hunger := float(hunger)) <= 1
+        ), f"'hunger' must be a value between 0 and 1 and not {hunger!r}"
         self._hunger = hunger
 
-        assert 0 <= (money := float(money)),\
-            f"'money' must be a value greater then 0 and not {money!r}"
+        assert 0 <= (
+            money := float(money)
+        ), f"'money' must be a value greater then 0 and not {money!r}"
         self._money = money
 
-        assert isinstance(in_love, Person) or in_love is None,\
-            "'in_love' must be an instance of '.models.Person' or None!"
+        assert (
+            isinstance(in_love, Person) or in_love is None
+        ), "'in_love' must be an instance of '.models.Person' or None!"
         self._in_love = in_love
 
-        assert isinstance(married, Person) or married is None,\
-            "'married' must be an instance of '.models.Person' or None!"
+        assert (
+            isinstance(married, Person) or married is None
+        ), "'married' must be an instance of '.models.Person' or None!"
         self._married = married
 
-        assert self.gender.type == "female" if (pregnant := bool(pregnant)) else True,\
-            "Only persons where ``Gender.type == 'female'`` can get pregnant!"
+        assert (
+            self.gender.type == "female" if (pregnant := bool(pregnant)) else True
+        ), "Only persons where ``Gender.type == 'female'`` can get pregnant!"
         self._pregnant = pregnant
 
-        assert 0 <= (age := int(age)),\
-            f"'age' must be a value greater then 0 and not {age!r}"
+        assert 0 <= (
+            age := int(age)
+        ), f"'age' must be a value greater then 0 and not {age!r}"
         self._age = age
 
-        assert isinstance(family, Family) or family is None,\
-            "'family' must be an instance of '.models.Family' or None!"
+        assert (
+            isinstance(family, Family) or family is None
+        ), "'family' must be an instance of '.models.Family' or None!"
         self._family = family or Family()
 
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique
-        self._id = str(id) or uuid.uuid4()  # without assert, because empty IDs 'll be replaced
+        self._id = (
+            str(id) or uuid.uuid4()
+        )  # without assert, because empty IDs 'll be replaced
 
         self._alive = bool(alive)
 
@@ -258,4 +269,4 @@ class Person(Base):
         -------
         bool
         """
-        return not self._alive
+        return not self.alive

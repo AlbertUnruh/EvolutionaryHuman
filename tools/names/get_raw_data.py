@@ -16,5 +16,7 @@ def save_file(*, url: str, file: str) -> None:
 
 
 if __name__ == "__main__":
-    save_file(url="https://raw.githubusercontent.com/organisciak/names/master/data/us-names-by-gender.csv",
-              file="raw.csv")
+    save_file(
+        url="https://raw.githubusercontent.com/organisciak/names/master/data/us-names-by-gender.csv",
+        file="raw.csv",
+    )
