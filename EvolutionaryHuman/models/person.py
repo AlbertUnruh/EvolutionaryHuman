@@ -48,7 +48,7 @@ class Person(PersonBase):
         iq: typing.Annotated[typing.SupportsInt, "MinVal[0]"],
         family: typing.Optional["Family"] = None,
         name: typing.AnyStr,
-        id: typing.Optional[typing.AnyStr] = None,  # noqa
+        id: typing.Optional[typing.AnyStr] = "",  # noqa
         alive: bool = True,
     ) -> typing.NoReturn:
         """
@@ -161,7 +161,8 @@ class Person(PersonBase):
         ValueError
             Raises if ``replace_old != True`` and the persons id already exists.
         """
-        person = cls.__init__(**kwargs)
+        person = object.__new__(cls)
+        person.__init__(**kwargs)
         # ToDo: connect to database to check for duplicates (persons id)
         # ToDo: connect to database to create entry
         return person
