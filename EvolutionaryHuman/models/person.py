@@ -7,6 +7,7 @@ from .base import (
     GenderBase as Gender,
     SexualityBase as Sexuality,
 )
+from .family import Family as _Family
 
 
 __all__ = ("Person",)
@@ -131,7 +132,7 @@ class Person(PersonBase):
         assert (
             isinstance(family, Family) or family is None
         ), "'family' must be an instance of '.models.base.FamilyBase' or None!"
-        self._family = family or __import__("family", None, None, ".").Family()
+        self._family = family or _Family()
 
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique

@@ -1,6 +1,7 @@
 import typing
 
 from .base import SexualityBase, GenderBase as Gender
+from .gender import Gender as _Gender
 
 
 __all__ = ("Sexuality", "sexualities")
@@ -64,7 +65,7 @@ class Sexuality(SexualityBase):
         bool
         """
         if isinstance(gender, str):
-            gender = Gender(gender)
+            gender = _Gender(gender)
         assert isinstance(
             gender, Gender
         ), f"gender must be an instance of 'GenderBase', not {gender.__class__.__name__!r}!"
