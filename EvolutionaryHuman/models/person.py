@@ -49,7 +49,7 @@ class Person(PersonBase):
         name: typing.AnyStr,
         id: typing.Optional[typing.AnyStr] = "",  # noqa
         alive: bool = True,
-    ) -> typing.NoReturn:
+    ) -> None:
         """
         Parameters
         ----------

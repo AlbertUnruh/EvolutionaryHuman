@@ -17,8 +17,10 @@ class Sexuality(SexualityBase):
     _type: str
 
     def __init__(
-        self, sexuality: str, gender: typing.Union[Gender, str]
-    ) -> typing.NoReturn:
+        self,
+        sexuality: str,
+        gender: typing.Union[Gender, str],
+    ) -> None:
         """
         Parameters
         ----------
