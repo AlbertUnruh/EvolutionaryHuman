@@ -7,7 +7,6 @@ from .base import (
     GenderBase as Gender,
     SexualityBase as Sexuality,
 )
-from .family import Family as _Family
 
 
 __all__ = ("Person",)
@@ -74,6 +73,13 @@ class Person(PersonBase):
         id: typing.AnyStr, optional
         alive: bool
         """
+        # at very first the setup...
+        if missing := self.setup_missing():
+            raise RuntimeError(
+                f"Incomplete setup for Person! Missing following "
+                f"settings for the classes: {', '.join(missing)}"
+            )
+
         # first the required ones...
         assert isinstance(
             gender, Gender
@@ -132,7 +138,7 @@ class Person(PersonBase):
         assert (
             isinstance(family, Family) or family is None
         ), "'family' must be an instance of '.models.base.FamilyBase' or None!"
-        self._family = family or _Family()
+        self._family = family or self._classes["family"]()
 
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique

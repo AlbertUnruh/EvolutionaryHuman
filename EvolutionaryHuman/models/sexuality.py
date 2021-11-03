@@ -1,7 +1,6 @@
 import typing
 
 from .base import SexualityBase, GenderBase as Gender
-from .gender import Gender as _Gender
 
 
 __all__ = ("Sexuality", "sexualities")
@@ -27,6 +26,12 @@ class Sexuality(SexualityBase):
         gender: Gender, str
             Needed for ``Sexuality.can_love()``.
         """
+        if missing := self.setup_missing():
+            raise RuntimeError(
+                f"Incomplete setup for Sexuality! Missing following "
+                f"settings for the classes: {', '.join(missing)}"
+            )
+
         assert (
             sexuality in sexualities
         ), f"Invalid sexuality {sexuality!r}! Try one of these: {', '.join(sexualities)}"
@@ -65,7 +70,7 @@ class Sexuality(SexualityBase):
         bool
         """
         if isinstance(gender, str):
-            gender = _Gender(gender)
+            gender = self._classes["gender"](gender)
         assert isinstance(
             gender, Gender
         ), f"gender must be an instance of 'GenderBase', not {gender.__class__.__name__!r}!"
