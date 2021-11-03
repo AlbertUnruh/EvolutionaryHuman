@@ -1,5 +1,14 @@
+import typing
 import unittest
 from EvolutionaryHuman import models
+
+
+T = typing.TypeVar("T")
+
+
+def generator(*args: T) -> T:
+    for arg in args:
+        yield arg
 
 
 class TestModels(unittest.TestCase):
@@ -31,6 +40,13 @@ class TestModels(unittest.TestCase):
             models.Family(
                 parents=range(42),
             )
+        family = models.Family(
+            parents=generator("Parent 1", "Parent 2"),
+        )
+        self.assertEqual(
+            family.parents,
+            ["Parent 1", "Parent 2"],
+        )
 
         gender = models.Gender(
             "male",
