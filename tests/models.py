@@ -12,7 +12,64 @@ def generator(*args: T) -> T:
 
 
 class TestModels(unittest.TestCase):
-    def test_create(self):
+    def test0_setup(self):
+        with self.assertRaises(RuntimeError):
+            models.Person(
+                gender=models.Gender(
+                    "male",
+                ),
+                sexuality=models.Sexuality(
+                    "homosexual",
+                    models.Gender(
+                        "male",
+                    ),
+                ),
+                name="TestCase",
+                iq=42,
+            )
+        with self.assertRaises(RuntimeError):
+            models.Sexuality(
+                "homosexual",
+                models.Gender(
+                    "male",
+                ),
+            )
+
+        models.Person.setup(
+            family_cls=models.Family,
+        )
+        models.Sexuality.setup(
+            gender_cls=models.Gender,
+        )
+
+        models.Person(
+            gender=models.Gender(
+                "male",
+            ),
+            sexuality=models.Sexuality(
+                "homosexual",
+                models.Gender(
+                    "male",
+                ),
+            ),
+            name="TestCase",
+            iq=42,
+        )
+        models.Sexuality(
+            "homosexual",
+            models.Gender(
+                "male",
+            ),
+        )
+
+    def test1_create(self):
+        models.Person.setup(
+            family_cls=models.Family,
+        )
+        models.Sexuality.setup(
+            gender_cls=models.Gender,
+        )
+
         with self.assertRaises(AssertionError):
             models.Person(
                 gender=None,
