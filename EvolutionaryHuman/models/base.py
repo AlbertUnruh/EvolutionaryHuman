@@ -97,14 +97,14 @@ class FamilyBase(Base, abc.ABC):
 
     @property
     @abc.abstractmethod
-    def parents(self) -> list[str]:
+    def parents(self) -> set[str]:
         """
         - all parents ids
         """
 
     @property
     @abc.abstractmethod
-    def children(self) -> list[str]:
+    def children(self) -> set[str]:
         """
         - all children ids
         """
@@ -176,11 +176,11 @@ class PersonBase(Base, abc.ABC):
     @classmethod
     def setup_missing(
         cls,
-    ) -> list:
-        missing = []
+    ) -> set:
+        missing = set()
         for key in cls._classes:
             if abc.ABC in cls._classes[key].__bases__:
-                missing.append(key)
+                missing.add(key)
         return missing
 
     @property
@@ -337,11 +337,11 @@ class SexualityBase(Base, abc.ABC):
     @classmethod
     def setup_missing(
         cls,
-    ) -> list:
-        missing = []
+    ) -> set:
+        missing = set()
         for key in cls._classes:
             if abc.ABC in cls._classes[key].__bases__:
-                missing.append(key)
+                missing.add(key)
         return missing
 
     @abc.abstractmethod

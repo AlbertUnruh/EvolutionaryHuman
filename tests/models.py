@@ -102,7 +102,7 @@ class TestModels(unittest.TestCase):
         )
         self.assertEqual(
             family.parents,
-            ["Parent 1", "Parent 2"],
+            {"Parent 1", "Parent 2"},
         )
 
         gender = models.Gender(
@@ -156,7 +156,7 @@ class TestModels(unittest.TestCase):
         )
         self.assertEqual(
             family.parents,
-            [person.id],
+            {person.id},
         )
 
 

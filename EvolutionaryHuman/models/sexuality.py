@@ -40,7 +40,7 @@ class Sexuality(SexualityBase):
         self._type = sexuality
 
         if isinstance(gender, str):
-            gender = Gender(gender)
+            gender = self._classes["gender"](gender)
         assert isinstance(
             gender, Gender
         ), f"gender must be an instance of 'GenderBase', not {gender.__class__.__name__!r}!"
