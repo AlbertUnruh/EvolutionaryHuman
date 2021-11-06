@@ -98,7 +98,10 @@ class TestModels(unittest.TestCase):
                 parents=range(42),
             )
         family = models.Family(
-            parents=generator("Parent 1", "Parent 2"),
+            parents=generator(
+                "Parent 1",
+                "Parent 2",
+            ),
         )
         self.assertEqual(
             family.parents,
