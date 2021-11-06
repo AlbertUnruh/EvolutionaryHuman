@@ -1,4 +1,4 @@
-from os import getcwd, chdir
+from os import getcwd, chdir, path
 
 
 __all__ = (
@@ -32,6 +32,16 @@ def get_file(
     cwd = getcwd()
     chdir(__PATH__)
     try:
+        if not path.isfile(file):
+            raise NotImplementedError(
+                f"Cannot find file {file} from directory {__PATH__}! "
+                f"You have to create the file by your own. "
+                f"You can use the tools in the project directory of EvolutionaryHuman or on GitHub: "
+                f"https://github.com/AlbertUnruh/EvolutionaryHuman/tree/master/tools. "
+                f"Context why you have to make this: to keep download-files small "
+                f"you have to scrape the data by your own. But only have to do this once and not after every update."
+            )
+
         with open(file) as f:
             return f.read()
     finally:

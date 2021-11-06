@@ -11,3 +11,7 @@ Pipfile.lock
 # Raw Data
 tools/**/*.csv
 tools/**/*.txt
+
+EvolutionaryHuman/data/names/female.txt
+EvolutionaryHuman/data/names/male.txt
+EvolutionaryHuman/data/names/neutral.txt
