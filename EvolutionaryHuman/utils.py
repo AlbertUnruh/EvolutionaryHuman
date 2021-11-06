@@ -1,15 +1,27 @@
 import math
+import typing
 
 from random import (
+    choice,
     choices,
     seed as set_random_seed,
 )
+
+from .data import (
+    get_names,
+    FILE_FEMALE,
+    FILE_MALE,
+    FILE_NEUTRAL,
+)
+from .models.base import GenderBase
+from .models import Gender
 
 
 __all__ = (
     "set_random_seed",
     "age_occurrence",
     "get_random_age",
+    "get_random_name",
 )
 
 
@@ -68,3 +80,37 @@ def get_random_age(
         )[0]
 
     return res
+
+
+def get_random_name(
+    *,
+    gender: typing.Union["GenderBase", str] = "genderless",
+) -> str:
+    """
+    Gets a name and respects the gender
+
+    Parameters
+    ----------
+    gender: GenderBase, str
+
+    Returns
+    -------
+    str
+    """
+    if isinstance(gender, str):
+        gender = Gender(gender)
+
+    assert isinstance(
+        gender, GenderBase
+    ), f"'gender' must be an instance of '.models.base.GenderBase' and not {gender.__class__.__name__!r}"
+
+    if gender.type == "female":
+        return choice(NAMES_FEMALE)
+    if gender.type == "male":
+        return choice(NAMES_MALE)
+    return choice(NAMES_NEUTRAL)
+
+
+NAMES_FEMALE: list[str] = get_names(category=FILE_FEMALE)
+NAMES_MALE: list[str] = get_names(category=FILE_MALE)
+NAMES_NEUTRAL: list[str] = get_names(category=FILE_NEUTRAL)

@@ -56,6 +56,31 @@ class TestUtils(unittest.TestCase):
             # fmt: on
         )
 
+    def test3_random_name(self):
+        utils.set_random_seed("TestCase")
+        self.assertNotEqual(
+            utils.get_random_name(),
+            utils.get_random_name(),
+        )
+
+        utils.set_random_seed("TestCase")
+        self.assertEqual(
+            utils.get_random_name(),
+            "Anthony",
+        )
+
+        utils.set_random_seed("TestCase")
+        self.assertEqual(
+            utils.get_random_name(gender="male"),
+            "Robinson",
+        )
+
+        utils.set_random_seed("TestCase")
+        self.assertEqual(
+            utils.get_random_name(gender="female"),
+            "Quianna",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
