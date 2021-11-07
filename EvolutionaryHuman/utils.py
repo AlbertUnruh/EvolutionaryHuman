@@ -14,7 +14,10 @@ from .data import (
     FILE_NEUTRAL,
 )
 from .models.base import GenderBase
-from .models import Gender
+from .models import (
+    Gender,
+    Person,
+)
 
 
 __all__ = (
@@ -22,6 +25,8 @@ __all__ = (
     "age_occurrence",
     "get_random_age",
     "get_random_name",
+    "get_random_iq",
+    "generate_random_person",
 )
 
 
@@ -110,3 +115,17 @@ def get_random_name(
 NAMES_FEMALE: list[str] = get_names(category=FILE_FEMALE)
 NAMES_MALE: list[str] = get_names(category=FILE_MALE)
 NAMES_NEUTRAL: list[str] = get_names(category=FILE_NEUTRAL)
+
+
+def get_random_iq(
+    *,
+    lower_bound: int = 0,
+    upper_bound: int = 120,
+) -> int:
+    raise NotImplementedError
+
+
+def generate_random_person(
+    **person_kwargs,
+) -> "Person":
+    raise NotImplementedError
