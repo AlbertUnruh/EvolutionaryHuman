@@ -71,15 +71,11 @@ def get_random_age(
         if lower_bound == 0 and upper_bound == 120
         else [age_occurrence(i) for i in range(lower_bound, upper_bound + 1)]
     )
-    res = lower_bound - 1
 
-    while not lower_bound <= res <= upper_bound:
-        res = choices(
-            range(lower_bound, upper_bound + 1),
-            occurrences,
-        )[0]
-
-    return res
+    return choices(
+        range(lower_bound, upper_bound + 1),
+        occurrences,
+    )[0]
 
 
 def get_random_name(
