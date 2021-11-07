@@ -17,6 +17,7 @@ from .models.base import GenderBase
 from .models import (
     Gender,
     Person,
+    Sexuality,
 )
 
 
@@ -27,6 +28,8 @@ __all__ = (
     "get_random_age",
     "get_random_name",
     "get_random_iq",
+    "get_random_gender",
+    "get_random_sexuality",
     "generate_random_person",
 )
 
@@ -203,7 +206,51 @@ def get_random_iq(
     )[0]
 
 
+def get_random_gender() -> "Gender":
+    """
+    Returns
+    -------
+    Gender
+    """
+    raise NotImplementedError
+
+
+def get_random_sexuality(
+    *,
+    gender: Gender,
+) -> "Sexuality":
+    """
+    Parameters
+    ----------
+    gender: Gender
+
+    Returns
+    -------
+    Sexuality
+    """
+    raise NotImplementedError
+
+
 def generate_random_person(
     **person_kwargs,
 ) -> "Person":
-    raise NotImplementedError
+    """
+    Parameters
+    ----------
+    person_kwargs
+        All arguments for the Person.
+        If no are set random values 'll be used.
+
+    Returns
+    -------
+    Person
+    """
+    # set required arguments
+    person_kwargs.setdefault("iq", get_random_iq())
+    person_kwargs.setdefault("gender", get_random_gender())
+    person_kwargs.setdefault(
+        "sexuality", get_random_sexuality(gender=person_kwargs["gender"])
+    )
+    person_kwargs.setdefault("name", get_random_name(gender=person_kwargs["gender"]))
+
+    return Person(**person_kwargs)

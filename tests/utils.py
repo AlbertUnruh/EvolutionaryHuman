@@ -103,6 +103,26 @@ class TestUtils(unittest.TestCase):
             # fmt: on
         )
 
+    def test4_random_gender(self):
+        return NotImplemented
+        utils.set_random_seed("TestCase")
+        self.assertNotEqual(
+            utils.get_random_gender(),
+            utils.get_random_gender(),
+        )
+
+    def test5_random_sexuality(self):
+        return NotImplemented
+        utils.set_random_seed("TestCase")
+        gender = utils.get_random_gender()
+        # Value: Gender("???")
+
+        utils.set_random_seed("TestCase")
+        self.assertNotEqual(
+            utils.get_random_sexuality(gender=gender),
+            utils.get_random_sexuality(gender=gender),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
