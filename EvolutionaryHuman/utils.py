@@ -305,6 +305,8 @@ def generate_random_person(
     person = Person(**person_kwargs)
 
     if person.is_lgbtiq():
+        # this change is made, 'cause it's statistically proven that
+        # LGBTIQ+*-individuals are unhappier due to discrimination and hate
         person._happiness = (4 / 5) * person.happiness
 
     return person
