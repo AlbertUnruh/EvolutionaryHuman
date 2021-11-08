@@ -142,8 +142,8 @@ class Person(PersonBase):
 
         # and last but not least the optional, but not recommended, ones...
         # ToDo: connect to a database to verify that the id is unique
-        self._id = (
-            str(id) or uuid.uuid4()
+        self._id = str(
+            id or uuid.uuid4()
         )  # without assert, because empty IDs 'll be replaced
 
         self._alive = bool(alive)
