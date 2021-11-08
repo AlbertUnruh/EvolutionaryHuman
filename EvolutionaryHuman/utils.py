@@ -208,6 +208,9 @@ def get_random_iq(
 
 def get_random_gender() -> "Gender":
     """
+    Creates a random gender based on data by:
+    https://www.hrc.org/resources/2018-lgbtq-youth-report
+
     Returns
     -------
     Gender
@@ -253,4 +256,9 @@ def generate_random_person(
     )
     person_kwargs.setdefault("name", get_random_name(gender=person_kwargs["gender"]))
 
-    return Person(**person_kwargs)
+    person = Person(**person_kwargs)
+
+    if person.is_lgbtiq():
+        ...
+
+    return person

@@ -302,6 +302,12 @@ class PersonBase(Base, abc.ABC):
         - check id
         """
 
+    @abc.abstractmethod
+    def is_lgbtiq(self) -> bool:
+        """
+        - whether the Person is LGBTIQ+*
+        """
+
 
 class SexualityBase(Base, abc.ABC):
     """

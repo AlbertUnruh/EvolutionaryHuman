@@ -307,3 +307,14 @@ class Person(PersonBase):
         bool
         """
         return not self.alive
+
+    def is_lgbtiq(self) -> bool:
+        """
+        Returns
+        -------
+        bool
+        """
+        return (
+            self.gender.type not in {"male", "female"}
+            or self.sexuality.type != "heterosexual"
+        )
