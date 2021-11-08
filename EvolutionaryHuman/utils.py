@@ -215,7 +215,27 @@ def get_random_gender() -> "Gender":
     -------
     Gender
     """
-    raise NotImplementedError
+    return Gender(
+        choices(GENDER_TYPES, GENDER_OCCURRENCE)[0],
+    )
+
+
+# fmt: off
+GENDER_DISTRIBUTION: dict[str, float] = {
+    # getting the percentage from around 80% to around 90%
+    "male":         4.605 * 2,
+    "female":       6.002 * 2,
+
+    "non-binary":   1.461,
+    "genderless":   1.109,
+}
+# fmt: on
+GENDER_TYPES: tuple[str, ...] = ()
+GENDER_OCCURRENCE: tuple[float, ...] = ()
+for t, o in GENDER_DISTRIBUTION.items():
+    GENDER_TYPES += (t,)
+    GENDER_OCCURRENCE += (o,)
+del t, o
 
 
 def get_random_sexuality(
@@ -223,6 +243,9 @@ def get_random_sexuality(
     gender: Gender,
 ) -> "Sexuality":
     """
+    Creates a random sexuality based on data by:
+    https://www.hrc.org/resources/2018-lgbtq-youth-report
+
     Parameters
     ----------
     gender: Gender
@@ -231,7 +254,30 @@ def get_random_sexuality(
     -------
     Sexuality
     """
-    raise NotImplementedError
+    return Sexuality(
+        choices(SEXUALITY_TYPES, SEXUALITY_OCCURRENCE)[0],
+        gender,
+    )
+
+
+# fmt: off
+SEXUALITY_DISTRIBUTION: dict[str, float] = {
+    # 3/4th (24) of the sum (32)
+    "heterosexual": 24.0,
+
+    # a quarter (8) of the sum (32):
+    "homosexual": 3.7,
+    "bisexual": 3.4,
+    "pansexual": 1.4,
+    "asexual": .5
+}
+# fmt: on
+SEXUALITY_TYPES: tuple[str, ...] = ()
+SEXUALITY_OCCURRENCE: tuple[float, ...] = ()
+for t, o in SEXUALITY_DISTRIBUTION.items():
+    SEXUALITY_TYPES += (t,)
+    SEXUALITY_OCCURRENCE += (o,)
+del t, o
 
 
 def generate_random_person(
@@ -259,6 +305,6 @@ def generate_random_person(
     person = Person(**person_kwargs)
 
     if person.is_lgbtiq():
-        ...
+        person._happiness = (4 / 5) * person.happiness
 
     return person

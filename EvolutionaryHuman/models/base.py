@@ -90,10 +90,10 @@ class FamilyBase(Base, abc.ABC):
     BaseClass for the family model.
     """
 
-    _slots_for_repr = {
+    _slots_for_repr = (
         "parents",
         "children",
-    }
+    )
 
     @property
     @abc.abstractmethod
@@ -115,9 +115,7 @@ class GenderBase(Base, abc.ABC):
     BaseClass for the gender model.
     """
 
-    _slots_for_repr = {
-        "type",
-    }
+    _slots_for_repr = ("type",)
 
     @property
     @abc.abstractmethod
@@ -134,7 +132,7 @@ class PersonBase(Base, abc.ABC):
     BaseClass for the person model.
     """
 
-    _slots_for_repr = {
+    _slots_for_repr = (
         "happiness",
         "hunger",
         "in_love",
@@ -149,7 +147,7 @@ class PersonBase(Base, abc.ABC):
         "name",
         "id",
         "alive",
-    }
+    )
 
     _classes: _classes_type = {"family": Base}
 
@@ -314,9 +312,7 @@ class SexualityBase(Base, abc.ABC):
     BaseClass for the sexuality model.
     """
 
-    _slots_for_repr = {
-        "type",
-    }
+    _slots_for_repr = ("type",)
 
     _classes: _classes_type = {"gender": Base}
 

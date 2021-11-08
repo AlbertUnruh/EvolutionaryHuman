@@ -103,24 +103,93 @@ class TestUtils(unittest.TestCase):
             # fmt: on
         )
 
-    def test4_random_gender(self):
-        return NotImplemented
+    def test5_random_gender(self):
         utils.set_random_seed("TestCase")
         self.assertNotEqual(
             utils.get_random_gender(),
             utils.get_random_gender(),
         )
 
-    def test5_random_sexuality(self):
-        return NotImplemented
+        utils.set_random_seed("TestCase")
+        self.assertEqual(
+            utils.get_random_gender().type,
+            "female",
+        )
+
+    def test6_random_sexuality(self):
         utils.set_random_seed("TestCase")
         gender = utils.get_random_gender()
-        # Value: Gender("???")
+        # Value: Gender("female")
 
         utils.set_random_seed("TestCase")
         self.assertNotEqual(
-            utils.get_random_sexuality(gender=gender),
-            utils.get_random_sexuality(gender=gender),
+            utils.get_random_sexuality(
+                gender=gender,
+            ),
+            utils.get_random_sexuality(
+                gender=gender,
+            ),
+        )
+
+        utils.set_random_seed("TestCase")
+        self.assertEqual(
+            utils.get_random_sexuality(
+                gender=gender,
+            ).type,
+            "heterosexual",
+        )
+
+    def test7_generate_person(self):
+        utils.set_random_seed("TestCase")
+        person = utils.generate_random_person()
+        person._id = "PLACEHOLDER-ID"  # this is made because the id is unique and so I can't check for equally
+        self.assertEqual(
+            str(person),
+            "<Person: happiness=0.8 hunger=1.0 in_love=None married=None pregnant=False gender=<Gender: type='genderles"
+            "s'> sexuality=<Sexuality: type='heterosexual'> age=0 money=0.0 iq=103 family=<Family: parents=set() childr"
+            "en=set()> name='Demetrice' id='PLACEHOLDER-ID' alive=True>",
+        )
+
+        utils.set_random_seed("TestCase")
+        results = []
+        for _ in range(10):
+            person = utils.generate_random_person()
+            person._id = "PLACEHOLDER-ID"  # this is made because the id is unique and so I can't check for equally
+            results.append(str(person))
+        self.assertEqual(
+            results,
+            # fmt: off
+            [
+                # results with the seed "TestCase"
+                "<Person: happiness=0.8 hunger=1.0 in_love=None married=None pregnant=False gender=<Gender: type='gende"
+                "rless'> sexuality=<Sexuality: type='heterosexual'> age=0 money=0.0 iq=103 family=<Family: parents=set("
+                ") children=set()> name='Demetrice' id='PLACEHOLDER-ID' alive=True>", "<Person: happiness=1.0 hunger=1."
+                "0 in_love=None married=None pregnant=False gender=<Gender: type='male'> sexuality=<Sexuality: type='he"
+                "terosexual'> age=0 money=0.0 iq=122 family=<Family: parents=set() children=set()> name='Shubh' id='PLA"
+                "CEHOLDER-ID' alive=True>", "<Person: happiness=0.8 hunger=1.0 in_love=None married=None pregnant=False"
+                " gender=<Gender: type='female'> sexuality=<Sexuality: type='bisexual'> age=0 money=0.0 iq=121 family=<"
+                "Family: parents=set() children=set()> name='Alix' id='PLACEHOLDER-ID' alive=True>", "<Person: happines"
+                "s=1.0 hunger=1.0 in_love=None married=None pregnant=False gender=<Gender: type='female'> sexuality=<Se"
+                "xuality: type='heterosexual'> age=0 money=0.0 iq=83 family=<Family: parents=set() children=set()> name"
+                "='Lyanna' id='PLACEHOLDER-ID' alive=True>", "<Person: happiness=0.8 hunger=1.0 in_love=None married=No"
+                "ne pregnant=False gender=<Gender: type='male'> sexuality=<Sexuality: type='homosexual'> age=0 money=0."
+                "0 iq=139 family=<Family: parents=set() children=set()> name='Aidan' id='PLACEHOLDER-ID' alive=True>",
+                "<Person: happiness=0.8 hunger=1.0 in_love=None married=None pregnant=False gender=<Gender: type='femal"
+                "e'> sexuality=<Sexuality: type='bisexual'> age=0 money=0.0 iq=100 family=<Family: parents=set() childr"
+                "en=set()> name='Fern' id='PLACEHOLDER-ID' alive=True>", "<Person: happiness=1.0 hunger=1.0 in_love=Non"
+                "e married=None pregnant=False gender=<Gender: type='male'> sexuality=<Sexuality: type='heterosexual'> "
+                "age=0 money=0.0 iq=115 family=<Family: parents=set() children=set()> name='Houston' id='PLACEHOLDER-ID"
+                "' alive=True>", "<Person: happiness=1.0 hunger=1.0 in_love=None married=None pregnant=False gender=<Ge"
+                "nder: type='male'> sexuality=<Sexuality: type='heterosexual'> age=0 money=0.0 iq=111 family=<Family: p"
+                "arents=set() children=set()> name='Junichi' id='PLACEHOLDER-ID' alive=True>", "<Person: happiness=0.8 "
+                "hunger=1.0 in_love=None married=None pregnant=False gender=<Gender: type='genderless'> sexuality=<Sexu"
+                "ality: type='heterosexual'> age=0 money=0.0 iq=86 family=<Family: parents=set() children=set()> name='"
+                "Jailyn' id='PLACEHOLDER-ID' alive=True>", "<Person: happiness=1.0 hunger=1.0 in_love=None married=None"
+                " pregnant=False gender=<Gender: type='female'> sexuality=<Sexuality: type='heterosexual'> age=0 money="
+                "0.0 iq=105 family=<Family: parents=set() children=set()> name='Dyanara' id='PLACEHOLDER-ID' alive=True"
+                ">"
+            ],
+            # fmt: on
         )
 
 
