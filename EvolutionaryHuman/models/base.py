@@ -101,6 +101,7 @@ class FamilyBase(Base, abc.ABC):
         """
         - all parents ids
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -108,6 +109,7 @@ class FamilyBase(Base, abc.ABC):
         """
         - all children ids
         """
+        raise NotImplementedError
 
 
 class GenderBase(Base, abc.ABC):
@@ -123,6 +125,7 @@ class GenderBase(Base, abc.ABC):
         """
         - the gender
         """
+        raise NotImplementedError
 
     __str__: typing.Callable[[object], str] = lambda self: self.type
 
@@ -188,6 +191,7 @@ class PersonBase(Base, abc.ABC):
         - 0.0 <= HAPPINESS <= 1.0
         - 1.0 -> max happiness
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -196,6 +200,7 @@ class PersonBase(Base, abc.ABC):
         - 0.0 <= HUNGER <= 1.0
         - 1.0 -> max hunger
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -204,6 +209,7 @@ class PersonBase(Base, abc.ABC):
         - no love -> None
         - in love -> PersonBase
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -212,6 +218,7 @@ class PersonBase(Base, abc.ABC):
         - not married -> None
         - married -> PersonBase
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -220,6 +227,7 @@ class PersonBase(Base, abc.ABC):
         - pregnant -> True
         - not pregnant -> False
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -227,6 +235,7 @@ class PersonBase(Base, abc.ABC):
         """
         - GenderBase(GENDER) <- means an instance of the class
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -234,6 +243,7 @@ class PersonBase(Base, abc.ABC):
         """
         - SexualityBase(SEXUALITY) <- means an instance of the class
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -241,6 +251,7 @@ class PersonBase(Base, abc.ABC):
         """
         - 0 <= AGE
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -248,6 +259,7 @@ class PersonBase(Base, abc.ABC):
         """
         - 0.0 <= MONEY
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -255,6 +267,7 @@ class PersonBase(Base, abc.ABC):
         """
         - 0 <= IQ
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -262,6 +275,7 @@ class PersonBase(Base, abc.ABC):
         """
         - FamilyBase(SEXUALITY) <- means an instance of the class
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -269,6 +283,7 @@ class PersonBase(Base, abc.ABC):
         """
         *should be clear what this is...*
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -276,6 +291,7 @@ class PersonBase(Base, abc.ABC):
         """
         - unique == True
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -284,6 +300,7 @@ class PersonBase(Base, abc.ABC):
         - alive -> True
         - not alive -> False
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -291,6 +308,7 @@ class PersonBase(Base, abc.ABC):
         """
         - not alive
         """
+        raise NotImplementedError
 
     @classmethod
     @abc.abstractmethod
@@ -299,12 +317,14 @@ class PersonBase(Base, abc.ABC):
         - create new Person
         - check id
         """
+        raise NotImplementedError
 
     @abc.abstractmethod
     def is_lgbtiq(self) -> bool:
         """
         - whether the Person is LGBTIQ+*
         """
+        raise NotImplementedError
 
 
 class SexualityBase(Base, abc.ABC):
@@ -351,6 +371,7 @@ class SexualityBase(Base, abc.ABC):
         """
         - should take additionally the gender
         """
+        raise NotImplementedError
 
     @property
     @abc.abstractmethod
@@ -358,11 +379,13 @@ class SexualityBase(Base, abc.ABC):
         """
         - the sexuality
         """
+        raise NotImplementedError
 
     @abc.abstractmethod
     def can_love(self, *, gender: typing.Union[GenderBase, str]) -> bool:
         """
         - check if the own gender is able to love the other gender
         """
+        raise NotImplementedError
 
     __str__: typing.Callable[[object], str] = lambda self: self.type
